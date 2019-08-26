@@ -22,11 +22,10 @@ Run *mvn clean package* command in swagger directory. It is going to take a whil
 After getting swagger-codegen-cli.jar file, here is a default batch script for compiling a csharp library:
 
 **set JAVA_OPTS=%JAVA_OPTS% -XX:MaxPermSize=256M -Xmx1024M -DloggerPath=conf/log4j.properties
-set ags=generate -t RELATIVE_TEMPLATE_DIRECTORY -i SWAGGER_JSON_FILE_URL -l csharp -o OUTPUT_DIRECTORY -DpackageName=
-- OUTPUT_LIBRARY_NAME: -DtargetFramework=v5.0
+set ags=generate -i SWAGGER_JSON_FILE_URL -l csharp -o OUTPUT_DIRECTORY -DpackageName=
+- OUTPUT_LIBRARY_NAME: -DtargetFramework=v4.5
 java %JAVA_OPTS% -jar %executable% %ags%**
 
-- RELATIVE_TEMPLATE_DIRECTORY: Relative mustache folder containing templates, *mine was ..\modules\swagger-codegen\src\main\resources\csharp*
 - SWAGGER_JSON_FILE_URL: swagger.json file location or url to be used
 - OUTPUT_DIRECTORY: Output folder of the generated source file
 - OUTPUT_LIBRARY_NAME: Output project name of the generated source code, *mine was Swagger.MyApi*
