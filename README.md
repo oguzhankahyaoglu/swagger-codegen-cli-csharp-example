@@ -39,3 +39,18 @@ java %JAVA_OPTS% -jar %executable% %ags%
 
 # Bonus Step - Compilation to DLL
 If you use csharp language instead of csharp-dotnet2, generated output contains *build.bat* file which builds generated source into a DLL file. Instead of copying the source code to your project, you can directly reference this dll. 
+To generate DLL file, you can use the batch file. However, there is a tls issue for the default bat which can be replaced with the batch commands below:
+
+```
+@echo off
+SET CSCPATH=%SYSTEMROOT%\Microsoft.NET\Framework\v4.0.30319
+if not exist ".\nuget.exe" powershell -Command "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;(new-object System.Net.WebClient).DownloadFile('https://dist.nuget.org/win-x86-commandline/latest/nuget.exe', '.\nuget.exe')"
+.\nuget.exe install src\IO.Swagger\packages.config -o packages
+if not exist ".\bin" mkdir bin
+copy packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll bin\Newtonsoft.Json.dll
+copy packages\JsonSubTypes.1.2.0\lib\net45\JsonSubTypes.dll bin\JsonSubTypes.dll
+copy packages\RestSharp.105.1.0\lib\net45\RestSharp.dll bin\RestSharp.dll
+%CSCPATH%\csc  /reference:bin\Newtonsoft.Json.dll;bin\JsonSubTypes.dll;bin\RestSharp.dll;System.ComponentModel.DataAnnotations.dll  /target:library /out:bin\IO.Swagger.dll /recurse:src\IO.Swagger\*.cs /doc:bin\IO.Swagger.xml
+
+```
+
