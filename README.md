@@ -19,12 +19,16 @@ mvn dependency:copy -Dartifact=io.swagger.codegen.v3:swagger-codegen-cli:3.0.11 
 
 # Step 4 - CSharp client generation
 After getting swagger-codegen-cli.jar file, here is a default batch script for compiling a csharp library:
+```
+SET APIURL=SWAGGER_JSON_FILE_URL
+SET OUTPUT_PATH=OUTPUT_DIRECTORY
+SET PACKAGE_NAME=OUTPUT_LIBRARY_NAME
+set executable=swagger-codegen-cli.jar
+set JAVA_OPTS=%JAVA_OPTS% -XX:MaxPermSize=256M -Xmx1024M -DloggerPath=conf/log4j.properties
+set ags=generate -i %APIURL% -l csharp -o %OUTPUT_PATH% -DpackageName=%PACKAGE_NAME% -DoptionalProjectFile=true
+java %JAVA_OPTS% -jar %executable% %ags%
 
-**set JAVA_OPTS=%JAVA_OPTS% -XX:MaxPermSize=256M -Xmx1024M -DloggerPath=conf/log4j.properties
-set ags=generate -i SWAGGER_JSON_FILE_URL -l csharp -o OUTPUT_DIRECTORY -DpackageName=
-- OUTPUT_LIBRARY_NAME: -DtargetFramework=v4.5
-java %JAVA_OPTS% -jar %executable% %ags%**
-
+```
 - SWAGGER_JSON_FILE_URL: swagger.json file location or url to be used
 - OUTPUT_DIRECTORY: Output folder of the generated source file
 - OUTPUT_LIBRARY_NAME: Output project name of the generated source code, *mine was Swagger.MyApi*
