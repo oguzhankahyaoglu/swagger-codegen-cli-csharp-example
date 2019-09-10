@@ -12,13 +12,10 @@ Maven must be installed before compiling CLI. You have to follow steps at these 
 
 Maven must be added to PATH environment variable too.
 
-# Step 3 - Checkout swagger codegen source
-Checkout https://github.com/swagger-api/swagger-codegen to a folder.
+# Step 3 - Checkout swagger-codegen-cli jar file
+mvn dependency:copy -Dartifact=io.swagger:swagger-codegen-cli:2.2.2 -DoutputDirectory=. -Dmdep.stripVersion=true
 
-# Step 4 - Compile CLI
-Run *mvn clean package* command in swagger directory. It is going to take a while, we will be using *modules\swagger-codegen-cli\target\swagger-codegen-cli.jar* file after compilation.
-
-# Step 5 - CSharp client generation
+# Step 4 - CSharp client generation
 After getting swagger-codegen-cli.jar file, here is a default batch script for compiling a csharp library:
 
 **set JAVA_OPTS=%JAVA_OPTS% -XX:MaxPermSize=256M -Xmx1024M -DloggerPath=conf/log4j.properties
