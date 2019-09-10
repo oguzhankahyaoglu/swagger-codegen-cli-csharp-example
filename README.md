@@ -14,6 +14,8 @@ Maven must be added to PATH environment variable too.
 
 # Step 3 - Checkout swagger-codegen-cli jar file
 mvn dependency:copy -Dartifact=io.swagger:swagger-codegen-cli:2.2.2 -DoutputDirectory=. -Dmdep.stripVersion=true
+To try v3 codegen tool:
+mvn dependency:copy -Dartifact=io.swagger.codegen.v3:swagger-codegen-cli:3.0.11 -DoutputDirectory=. -Dmdep.stripVersion=true
 
 # Step 4 - CSharp client generation
 After getting swagger-codegen-cli.jar file, here is a default batch script for compiling a csharp library:
